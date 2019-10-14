@@ -53,7 +53,7 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
             fputs("}\n",fp);
 
             sprintf(buffer, "line:nth-child(%d) {\n"
-                        "\tanimation: expand%d %ds linear forwards\n"
+                        "\tanimation: expand%d %fs linear forwards\n"
                         "}\n\n",cpt+1,cpt,draw.nbLines*draw.anim_duration);
             fputs(buffer,fp);
 
@@ -124,7 +124,7 @@ void _draw(struct _drawing *draw, struct _coordinate_lst **movement, int length)
     }
 
     draw->nbLines = draw->nbLines + 1;
-    
+
     draw->current = new_coord;
     _push(movement, new_coord, length, draw->color);
 }
