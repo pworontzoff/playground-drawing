@@ -21,7 +21,8 @@ void _change_color(struct _drawing * draw,unsigned char red, unsigned char green
 
 void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
     int i,j,numLine=0,cpt,size;
-    struct _coordinate prec, *initLst = lst;
+    struct _coordinate prec;
+    struct _coordinate_lst *initLst = lst;
     FILE *fp;
     char buffer[500];
 
