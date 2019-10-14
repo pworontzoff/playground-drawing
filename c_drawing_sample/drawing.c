@@ -36,24 +36,26 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
     cpt = 0;
 
     while (lst!=NULL) {
-        sprintf(buffer, "@keyframes expand%d {\n",cpt);
-        fputs(buffer,fp);
-
-        size = _getSizeOfLineFrom(initLst,numLine);
-
-        for (numLine = 0; numLine < draw.nbLines; numLine++) {
-            sprintf(buffer, "%.3f% { stroke-dasharray: %d %d;\n",(numLine*100.0)/draw.nbLines,numLine <= cpt?0:size,size);
+        if (lst->color.red != -1 || lst->color.green != -1 || lst->color.bleue != -1) { // ligne normale
+            sprintf(buffer, "@keyframes expand%d {\n",cpt);
             fputs(buffer,fp);
-        }
-        sprintf(buffer, "100% { stroke-dasharray: %d %d;\n",size,size);
-        fputs(buffer,fp);
-        fputs("}\n",fp);
 
-        sprintf(buffer, "line:nth-child(%d) {\n"
+            size = _getSizeOfLineFrom(initLst,numLine);
+
+            for (numLine = 0; numLine < draw.nbLines; numLine++) {
+                sprintf(buffer, "%.3f% { stroke-dasharray: %d %d;\n",(numLine*100.0)/draw.nbLines,numLine <= cpt?0:size,size);
+                fputs(buffer,fp);
+            }
+            sprintf(buffer, "100% { stroke-dasharray: %d %d;\n",size,size);
+            fputs(buffer,fp);
+            fputs("}\n",fp);
+
+            sprintf(buffer, "line:nth-child(%d) {\n"
                         "\tanimation: expand%d %ds linear forwards\n"
                         "}\n\n",cpt+1,cpt,draw.nbLines*draw.anim_duration);
-        fputs(buffer,fp);
-            
+            fputs(buffer,fp);
+
+        } // --> si ligne transparente, non traitée dans l'animation
         cpt++;
         prec = lst->coordinate;
         lst = lst->next;
@@ -86,7 +88,8 @@ void _turn(struct _drawing *draw, int angle, int side) {
     draw->angle = draw->angle + side * (angle * PI / 180);
 }
 
-void _move(struct _drawing *draw,int x, int y) {
+/*
+void _move(struct _drawing *draw,struct _coordinate_lst *lst, int x, int y) {
     draw->current.x=x;
     draw->current.y=y;
 
@@ -94,6 +97,23 @@ void _move(struct _drawing *draw,int x, int y) {
     draw->current.color.bleue = -1;
     draw->current.color.green = -1;
     draw->current.color.red = -1;
+}
+*/
+
+void _move(struct _drawing *draw, struct _coordinate_lst **movement, int length) {
+    struct _coordinate new_coord;
+
+    //printf("x : %d - y : %d \n",draw->current.x,draw->current.y);
+
+    new_coord.x = round(length * cos(draw->angle) + draw->current.x);
+    new_coord.y = round(length * sin(draw->angle) + draw->current.y);
+
+    if (*movement==NULL) {
+        _push(movement,draw->current, length, draw->color);
+    }
+
+    draw->current = new_coord;
+    _push(movement, new_coord, length, draw->color);
 }
 
 void _draw(struct _drawing *draw, struct _coordinate_lst **movement, int length) {
@@ -174,6 +194,6 @@ void draw(int length) {
 }
 
 void move(int x, int y) {
-    _move(&_the_draw,x,y);
+    _move(&_the_draw,_movements,x,y);
 }
 
