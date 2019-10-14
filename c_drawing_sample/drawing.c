@@ -29,8 +29,6 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
     fp = fopen("output.html","wt");
 
     fputs("<style>\n",fp);
-    //sprintf(buffer, "-nbLines : %d...\n",draw.nbLines);
-    //fputs(buffer,fp);
 
     prec = lst->coordinate;
     lst = lst->next;
@@ -53,7 +51,7 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
             fputs("}\n",fp);
 
             sprintf(buffer, "line:nth-child(%d) {\n"
-                        "\tanimation: expand%d %fs linear forwards\n"
+                        "\tanimation: expand%d %.2fs linear forwards\n"
                         "}\n\n",cpt+1,cpt,draw.nbLines*draw.anim_duration);
             fputs(buffer,fp);
 
