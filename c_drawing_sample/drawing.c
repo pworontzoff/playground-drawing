@@ -20,7 +20,7 @@ void _change_color(struct _drawing * draw, short red, short green, short blue) {
 }
 
 void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
-    int numLine=0,cpt,size;
+    int numLine=0,cpt,cpt_all_lines,size;
     struct _coordinate prec;
     struct _coordinate_lst *initLst = lst;
     FILE *fp;
@@ -33,17 +33,17 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
     prec = lst->coordinate;
     lst = lst->next;
 
-    cpt = 0;
+    cpt = cpt_all_lines = 0;
 
     while (lst!=NULL) {
         if (lst->color.red != -1 || lst->color.green != -1 || lst->color.blue != -1) { // ligne normale
             sprintf(buffer, "@keyframes expand%d {\n",cpt);
             fputs(buffer,fp);
 
-            size = _getSizeOfLineFrom(initLst,numLine);
+            size = _getSizeOfLineFrom(initLst,cpt_all_lines);
 
             for (numLine = 0; numLine < draw.nbLines; numLine++) {
-                sprintf(buffer, "%.3f% { stroke-dasharray: %d %d; }\n",(numLine*100.0)/draw.nbLines,numLine <= cpt?0:size,size);
+                sprintf(buffer, "%.3f% { stroke-dasharray: %d %d; }\n",(numLine*100.0)/draw.nbLines,numLine <= cpt_all_lines?0:size,size);
                 fputs(buffer,fp);
             }
             sprintf(buffer, "100% { stroke-dasharray: %d %d; }\n",size,size);
@@ -54,9 +54,9 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
                         "\tanimation: expand%d %.2fs linear forwards\n"
                         "}\n\n",cpt+1,cpt,draw.nbLines*draw.anim_duration);
             fputs(buffer,fp);
-
+            cpt++;
         } // --> si ligne transparente, non traitée dans l'animation
-        cpt++;
+        cpt_all_lines++;
         prec = lst->coordinate;
         lst = lst->next;
     }
