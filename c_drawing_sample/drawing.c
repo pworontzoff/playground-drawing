@@ -88,20 +88,13 @@ void _turn(struct _drawing *draw, int angle, int side) {
     draw->angle = draw->angle + side * (angle * PI / 180);
 }
 
-/*
-void _move(struct _drawing *draw,struct _coordinate_lst *lst, int x, int y) {
-    draw->current.x=x;
-    draw->current.y=y;
-
-    // should be handle as rgba(0,0,0,0), thus transparent line :
-    draw->current.color.bleue = -1;
-    draw->current.color.green = -1;
-    draw->current.color.red = -1;
-}
-*/
 
 void _move(struct _drawing *draw, struct _coordinate_lst **movement, int length) {
     struct _coordinate new_coord;
+    struct color cTranspa;
+
+    // should be handle as rgba(0,0,0,0), thus transparent line, and not animated :
+    cTranspa.red = cTranspa.green = cTranspa.bleue = -1;
 
     //printf("x : %d - y : %d \n",draw->current.x,draw->current.y);
 
@@ -109,11 +102,11 @@ void _move(struct _drawing *draw, struct _coordinate_lst **movement, int length)
     new_coord.y = round(length * sin(draw->angle) + draw->current.y);
 
     if (*movement==NULL) {
-        _push(movement,draw->current, length, draw->color);
+        _push(movement,draw->current, length, cTranspa);
     }
 
     draw->current = new_coord;
-    _push(movement, new_coord, length, draw->color);
+    _push(movement, new_coord, length, cTranspa);
 }
 
 void _draw(struct _drawing *draw, struct _coordinate_lst **movement, int length) {
@@ -193,7 +186,7 @@ void draw(int length) {
     _draw(&_the_draw,&_movements,length);
 }
 
-void move(int x, int y) {
-    _move(&_the_draw,_movements,x,y);
+void move(int length) {
+    _move(&_the_draw,_movements,length);
 }
 

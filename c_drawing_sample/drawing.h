@@ -46,7 +46,7 @@ void display_drawing();
 void change_color(unsigned char, unsigned char, unsigned char);
 void turn(int,int);
 void draw(int);
-void move(int, int);
+void move(int);
 
 void _init_drawing(struct _drawing *, int, int, float);
 void _draw(struct _drawing *, struct _coordinate_lst **, int);
@@ -54,7 +54,7 @@ void _change_color(struct _drawing *,unsigned char, unsigned char, unsigned char
 void _push(struct _coordinate_lst **, struct _coordinate, int, struct RGB);
 void _turn(struct _drawing *, int, int);
 void _display_drawing(struct _drawing, struct _coordinate_lst *);
-void _move(struct _drawing *, struct _coordinate_lst *, int, int);
+void _move(struct _drawing *, struct _coordinate_lst **, int);
 int _getSizeOfLineFrom(struct _coordinate_lst *, int);
 
 #endif // DRAWING_H_INCLUDED
