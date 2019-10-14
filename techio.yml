@@ -1,4 +1,26 @@
-title: Simple C Template
+title: Demo Drawing
 plan:
-- title: C Snippet
-  statement: statement.md
+- title: Demo
+  statement: markdowns/sample.md
+- title: Exercice 1
+  statement: markdowns/ex1.md
+- title: Exercice 2
+  statement: markdowns/ex2.md
+- title: Exercice 3
+  statement: markdowns/ex3.md
+- title: Exercice 4
+  statement: markdowns/ex4.md
+- title: Exercice 5
+  statement: markdowns/ex5.md
+  
+projects:
+  drawing:
+    root: /c_drawing
+    runner:
+      name: techio/cmake-gcc-runner
+      version: latest
+  sample:
+    root: /c_drawing_sample
+    runner:
+      name: techio/cmake-gcc-runner
+      version: latest      
