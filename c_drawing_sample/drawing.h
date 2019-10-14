@@ -48,7 +48,7 @@ void turn(int,int);
 void draw(int);
 void move(int, int);
 
-void _init_drawing(struct _drawing *, int, int);
+void _init_drawing(struct _drawing *, int, int, float);
 void _draw(struct _drawing *, struct _coordinate_lst **, int);
 void _change_color(struct _drawing *,unsigned char, unsigned char, unsigned char);
 void _push(struct _coordinate_lst **, struct _coordinate, int, struct RGB);
