@@ -91,7 +91,7 @@ void _turn(struct _drawing *draw, int angle, int side) {
 
 void _move(struct _drawing *draw, struct _coordinate_lst **movement, int length) {
     struct _coordinate new_coord;
-    struct color cTranspa;
+    struct RGB cTranspa;
 
     // should be handle as rgba(0,0,0,0), thus transparent line, and not animated :
     cTranspa.red = cTranspa.green = cTranspa.bleue = -1;
