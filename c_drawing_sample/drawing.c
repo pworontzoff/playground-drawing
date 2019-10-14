@@ -187,6 +187,6 @@ void draw(int length) {
 }
 
 void move(int length) {
-    _move(&_the_draw,_movements,length);
+    _move(&_the_draw,&_movements,length);
 }
 
