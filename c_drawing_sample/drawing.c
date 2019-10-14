@@ -43,10 +43,10 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
             size = _getSizeOfLineFrom(initLst,numLine);
 
             for (numLine = 0; numLine < draw.nbLines; numLine++) {
-                sprintf(buffer, "%.3f% { stroke-dasharray: %d %d;\n",(numLine*100.0)/draw.nbLines,numLine <= cpt?0:size,size);
+                sprintf(buffer, "%.3f% { stroke-dasharray: %d %d; }\n",(numLine*100.0)/draw.nbLines,numLine <= cpt?0:size,size);
                 fputs(buffer,fp);
             }
-            sprintf(buffer, "100% { stroke-dasharray: %d %d;\n",size,size);
+            sprintf(buffer, "100% { stroke-dasharray: %d %d; }\n",size,size);
             fputs(buffer,fp);
             fputs("}\n",fp);
 
