@@ -162,7 +162,7 @@ int _getSizeOfLineFrom(struct _coordinate_lst *lst, int numLine){
         lst = lst->next;
     }
 
-    return lst==null?-1:lst->length;
+    return lst==NULL?-1:lst->length;
 }
 
 void init_drawing(int width, int height, float d) {
