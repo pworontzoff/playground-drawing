@@ -8,19 +8,19 @@ void _init_drawing(struct _drawing *draw, int width, int height, float d) {
     draw->anim_duration = d;
     draw->current.x = width/2;
     draw->current.y = height/2;
-    draw->color.bleue = 255;
+    draw->color.blue = 255;
     draw->color.green = 0;
     draw->color.red = 0;
 }
 
-void _change_color(struct _drawing * draw,unsigned char red, unsigned char green, unsigned char bleue) {
-    draw->color.bleue = bleue;
+void _change_color(struct _drawing * draw, short red, short green, short blue) {
+    draw->color.blue = blue;
     draw->color.green = green;
     draw->color.red = red;
 }
 
 void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
-    int i,j,numLine=0,cpt,size;
+    int numLine=0,cpt,size;
     struct _coordinate prec;
     struct _coordinate_lst *initLst = lst;
     FILE *fp;
@@ -38,7 +38,7 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
     cpt = 0;
 
     while (lst!=NULL) {
-        if (lst->color.red != -1 || lst->color.green != -1 || lst->color.bleue != -1) { // ligne normale
+        if (lst->color.red != -1 || lst->color.green != -1 || lst->color.blue != -1) { // ligne normale
             sprintf(buffer, "@keyframes expand%d {\n",cpt);
             fputs(buffer,fp);
 
@@ -72,10 +72,10 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
     sprintf(buffer,"<svg height='%d' width='%d' style='border: 1px solid black'>\n",draw.height,draw.width);
     fputs(buffer,fp);
     while (lst!=NULL) {
-        if (lst->color.red == -1 && lst->color.green == -1 && lst->color.bleue == -1) {
+        if (lst->color.red == -1 && lst->color.green == -1 && lst->color.blue == -1) {
             sprintf(buffer,"<line x1='%d' y1='%d' x2='%d' y2='%d' style='stroke:rgba(0,0,0,0);stroke-width:2' />\n",prec.x,prec.y,lst->coordinate.x,lst->coordinate.y);
         } else {
-            sprintf(buffer,"<line x1='%d' y1='%d' x2='%d' y2='%d' style='stroke:rgb(%d,%d,%d);stroke-width:2' />\n",prec.x,prec.y,lst->coordinate.x,lst->coordinate.y,lst->color.red,lst->color.green,lst->color.bleue);
+            sprintf(buffer,"<line x1='%d' y1='%d' x2='%d' y2='%d' style='stroke:rgb(%d,%d,%d);stroke-width:2' />\n",prec.x,prec.y,lst->coordinate.x,lst->coordinate.y,lst->color.red,lst->color.green,lst->color.blue);
         }
         fputs(buffer,fp);
         prec = lst->coordinate;
@@ -176,8 +176,8 @@ void display_drawing() {
     _display_drawing(_the_draw,_movements);
 }
 
-void change_color(unsigned char red, unsigned char green, unsigned char bleue) {
-    _change_color(&_the_draw,red,green,bleue);
+void change_color(short red, short green, short blue) {
+    _change_color(&_the_draw,red,green,blue);
 }
 
 void turn(int angle, int side) {

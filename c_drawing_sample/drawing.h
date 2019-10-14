@@ -10,9 +10,9 @@
 #define RIGHT 1
 
 struct RGB {
-    unsigned char red;
-    unsigned char green;
-    unsigned char bleue;
+    short red;
+    short green;
+    short blue;
 };
 
 struct _coordinate {
@@ -43,14 +43,14 @@ struct _coordinate_lst *_movements;
 
 void init_drawing(int, int, float);
 void display_drawing();
-void change_color(unsigned char, unsigned char, unsigned char);
+void change_color(short, short, short);
 void turn(int,int);
 void draw(int);
 void move(int);
 
 void _init_drawing(struct _drawing *, int, int, float);
 void _draw(struct _drawing *, struct _coordinate_lst **, int);
-void _change_color(struct _drawing *,unsigned char, unsigned char, unsigned char);
+void _change_color(struct _drawing *,short, short, short);
 void _push(struct _coordinate_lst **, struct _coordinate, int, struct RGB);
 void _turn(struct _drawing *, int, int);
 void _display_drawing(struct _drawing, struct _coordinate_lst *);
