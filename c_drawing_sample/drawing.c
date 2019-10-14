@@ -133,7 +133,7 @@ void _push(struct _coordinate_lst **lst, struct _coordinate coord, int length, s
     new_c = malloc(sizeof(struct _coordinate_lst));
 
     new_c->coordinate = coord;
-    mew_c->length = 0;
+    new_c->length = 0;
     new_c->color = color;
 
     prec=NULL;
