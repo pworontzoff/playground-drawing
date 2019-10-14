@@ -121,10 +121,10 @@ void _draw(struct _drawing *draw, struct _coordinate_lst **movement, int length)
 
     if (*movement==NULL) {
         _push(movement,draw->current, length, draw->color);
-    } else {
-        draw->nbLines = draw->nbLines + 1;
     }
 
+    draw->nbLines = draw->nbLines + 1;
+    
     draw->current = new_coord;
     _push(movement, new_coord, length, draw->color);
 }
