@@ -52,7 +52,7 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
 
             sprintf(buffer, "line:nth-child(%d) {\n"
                         "\tanimation: expand%d %.2fs linear forwards\n"
-                        "}\n\n",cpt+1,cpt,draw.nbLines*draw.anim_duration);
+                        "}\n\n",cpt_all_lines+1,cpt,draw.nbLines*draw.anim_duration);
             fputs(buffer,fp);
             cpt++;
         } // --> si ligne transparente, non traitée dans l'animation
