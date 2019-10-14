@@ -142,8 +142,14 @@ void _push(struct _coordinate_lst **lst, struct _coordinate coord, int length, s
 }
 
 
-void _getSizeOfLineFrom(struct _coordinate_lst *lst, int length){
+int _getSizeOfLineFrom(struct _coordinate_lst *lst, int numLine){
+    int cpt=0;
+    while (lst!=NULL && cpt<numLine) {
+        cpt++;
+        lst = lst->next;
+    }
 
+    return lst==null?-1:lst->length;
 }
 
 void init_drawing(int width, int height, float d) {
