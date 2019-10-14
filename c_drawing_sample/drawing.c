@@ -29,8 +29,8 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
     fp = fopen("output.html","wt");
 
     fputs("<style>\n",fp);
-    sprintf(buffer, "-nbLines : %d...\n",draw.nbLines);
-    fputs(buffer,fp);
+    //sprintf(buffer, "-nbLines : %d...\n",draw.nbLines);
+    //fputs(buffer,fp);
 
     prec = lst->coordinate;
     lst = lst->next;
