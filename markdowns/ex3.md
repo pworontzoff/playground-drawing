@@ -9,4 +9,4 @@ En utilisant les commandes fournies par la bibliothèque `drawing.h`, écrire un
 
 
 
-@[Sample paper]({"stubs": ["main.c"],"command": "sh /project/target/run.sh", "project" : "drawing"})
+@[Exercice 3]({"stubs": ["main.c"],"command": "sh /project/target/run.sh", "project" : "drawing"})
