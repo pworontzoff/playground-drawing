@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include "drawing.h"
 
+#define WIDTH 1050
+#define HEIGHT 500
+
 int main() {
     int i; 
 
-    init_drawing(1050,500,0.5);
+    init_drawing(WIDTH,HEIGHT,0.5);
     
     for (i=0;i<2;i++) {
         draw(100);
