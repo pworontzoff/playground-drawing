@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define PI 3.1415
+#define PI 3.1415926535897932384626433832795
 #define LEFT -1
 #define RIGHT 1
 
