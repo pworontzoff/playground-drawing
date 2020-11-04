@@ -71,9 +71,9 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
     fputs(buffer,fp);
     while (lst!=NULL) {
         if (lst->color.red == -1 && lst->color.green == -1 && lst->color.blue == -1) {
-            sprintf(buffer,"<line x1='%d' y1='%d' x2='%d' y2='%d' style='stroke:rgba(0,0,0,0);stroke-width:2' />\n",prec.x,prec.y,lst->coordinate.x,lst->coordinate.y);
+            sprintf(buffer,"<line x1='%f' y1='%f' x2='%f' y2='%f' style='stroke:rgba(0,0,0,0);stroke-width:2' />\n",prec.x,prec.y,lst->coordinate.x,lst->coordinate.y);
         } else {
-            sprintf(buffer,"<line x1='%d' y1='%d' x2='%d' y2='%d' style='stroke:rgb(%d,%d,%d);stroke-width:2' />\n",prec.x,prec.y,lst->coordinate.x,lst->coordinate.y,lst->color.red,lst->color.green,lst->color.blue);
+            sprintf(buffer,"<line x1='%f' y1='%f' x2='%f' y2='%f' style='stroke:rgb(%d,%d,%d);stroke-width:2' />\n",prec.x,prec.y,lst->coordinate.x,lst->coordinate.y,lst->color.red,lst->color.green,lst->color.blue);
         }
         fputs(buffer,fp);
         prec = lst->coordinate;
@@ -98,8 +98,8 @@ void _move(struct _drawing *draw, struct _coordinate_lst **movement, int length)
 
     //printf("x : %d - y : %d \n",draw->current.x,draw->current.y);
 
-    new_coord.x = round(length * cos(draw->angle) + draw->current.x);
-    new_coord.y = round(length * sin(draw->angle) + draw->current.y);
+    new_coord.x = length * cos(draw->angle) + draw->current.x;
+    new_coord.y = length * sin(draw->angle) + draw->current.y;
 
     if (*movement==NULL) {
         _push(movement,draw->current, length, cTranspa);
@@ -114,8 +114,8 @@ void _draw(struct _drawing *draw, struct _coordinate_lst **movement, int length)
 
     //printf("x : %d - y : %d \n",draw->current.x,draw->current.y);
 
-    new_coord.x = round(length * cos(draw->angle) + draw->current.x);
-    new_coord.y = round(length * sin(draw->angle) + draw->current.y);
+    new_coord.x = length * cos(draw->angle) + draw->current.x;
+    new_coord.y = length * sin(draw->angle) + draw->current.y;
 
     if (*movement==NULL) {
         _push(movement,draw->current, length, draw->color);

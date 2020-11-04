@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define PI 3.1415
+#define PI M_PI
 #define LEFT -1
 #define RIGHT 1
 
@@ -16,8 +16,8 @@ struct RGB {
 };
 
 struct _coordinate {
-    int x;
-    int y;
+    float x;
+    float y;
 };
 
 struct _coordinate_lst {
