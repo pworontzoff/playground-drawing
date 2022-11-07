@@ -84,7 +84,7 @@ void _display_drawing(struct _drawing draw, struct _coordinate_lst *lst) {
     //system("cmd /c start output.html");
 }
 
-void _turn(struct _drawing *draw, int angle, int side) {
+void _turn(struct _drawing *draw, double angle, int side) {
     draw->angle = draw->angle + side * (angle * PI / 180);
 }
 
@@ -178,7 +178,7 @@ void change_color(short red, short green, short blue) {
     _change_color(&_the_draw,red,green,blue);
 }
 
-void turn(int angle, int side) {
+void turn(double angle, int side) {
     _turn(&_the_draw,angle,side);
 }
 
